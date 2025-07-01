@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class AutofillFormScreen extends StatefulWidget {
-  const AutofillFormScreen({super.key});
+class AutofillFormPage extends StatefulWidget {
+  const AutofillFormPage({super.key});
 
   @override
-  State<AutofillFormScreen> createState() => _AutofillFormScreenState();
+  State<AutofillFormPage> createState() => _AutofillFormPageState();
 }
 
-class _AutofillFormScreenState extends State<AutofillFormScreen> {
+class _AutofillFormPageState extends State<AutofillFormPage> {
   final idController = TextEditingController();
   final nameController = TextEditingController();
   final surnameController = TextEditingController();
