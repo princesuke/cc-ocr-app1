@@ -22,7 +22,21 @@ class _AutofillFormPageState extends State<AutofillFormPage> {
     final text = ModalRoute.of(context)!.settings.arguments as String?;
     str = text;
     if (text != null && text.isNotEmpty) {
-      //เงื่อนไข ดึง text มาใช้งาน
+      //ดึงเลขบัตร
+      final idMatch = RegExp(r'\d\s\d{4}\s\d{5}\s\d{2}\s\d').firstMatch(text);
+      if (idMatch != null) {
+        final id = idMatch.group(0)!.replaceAll(RegExp(r'\s+'), '');
+        idController.text = id;
+        // str = id;
+      }
+
+      final nameWithTitleMatch = RegExp(
+        r'(?:Name|Neme)\s+(?:Mr|Mrs|Ms)\.?\s+([^\s]+)',
+      ).firstMatch(text);
+
+      if (nameWithTitleMatch != null) {
+        nameController.text = nameWithTitleMatch.group(1)!;
+      }
     }
   }
 
