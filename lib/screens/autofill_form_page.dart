@@ -11,7 +11,7 @@ class _AutofillFormPageState extends State<AutofillFormPage> {
   final idController = TextEditingController();
   final nameController = TextEditingController();
   final surnameController = TextEditingController();
-  final expirycontroller = TextEditingController();
+  final expiryController = TextEditingController();
 
   String? str = '';
 
@@ -36,6 +36,19 @@ class _AutofillFormPageState extends State<AutofillFormPage> {
 
       if (nameWithTitleMatch != null) {
         nameController.text = nameWithTitleMatch.group(1)!;
+      }
+
+      final lastNameMatch = RegExp(r'Last name\s+([^\s]+)').firstMatch(text);
+      if (lastNameMatch != null) {
+        surnameController.text = lastNameMatch.group(1)!;
+      }
+
+      final expiryMatch = RegExp(
+        r'(\d{4})\s*\n\s*Date of Expiry',
+        caseSensitive: false,
+      ).firstMatch(text);
+      if (expiryMatch != null) {
+        expiryController.text = expiryMatch.group(1)!;
       }
     }
   }
@@ -62,7 +75,7 @@ class _AutofillFormPageState extends State<AutofillFormPage> {
               decoration: const InputDecoration(labelText: 'นามสกุล'),
             ),
             TextField(
-              controller: expirycontroller,
+              controller: expiryController,
               decoration: const InputDecoration(labelText: 'ปีหมดอายุ'),
             ),
             const SizedBox(height: 24),
