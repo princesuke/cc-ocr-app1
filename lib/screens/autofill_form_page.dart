@@ -16,7 +16,7 @@ class _AutofillFormPageState extends State<AutofillFormPage> {
   String? str = '';
 
   @override
-  void didChangeDepend() {
+  void didChangeDependencies() {
     super.didChangeDependencies();
 
     final text = ModalRoute.of(context)!.settings.arguments as String?;
