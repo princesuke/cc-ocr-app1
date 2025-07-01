@@ -11,11 +11,39 @@ class OcrPage extends StatefulWidget {
 }
 
 class _OcrPageState extends State<OcrPage> {
+  String? recognizedText;
+  File? imageFile;
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('OCR ด้วย ML Kit')),
-      body: Text('ocr page'),
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.all(24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              imageFile != null
+                  ? Image.file(imageFile!, height: 200)
+                  : const SizedBox.shrink(),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text("เลือกรูปภาพเพื่อสแกนข้อความ"),
+              ),
+              const SizedBox(height: 20),
+              if (isLoading)
+                const CircularProgressIndicator()
+              else if (recognizedText != null)
+                SelectableText(recognizedText!, textAlign: TextAlign.center)
+              else
+                const Text('ยังไม่มีข้อความ', textAlign: TextAlign.center),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
