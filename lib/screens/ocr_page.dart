@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
-// import ''
+import '../routes/app_routes.dart';
 
 class OcrPage extends StatefulWidget {
   const OcrPage({super.key});
@@ -36,7 +36,7 @@ class _OcrPageState extends State<OcrPage> {
     });
     textRecognizer.close();
 
-    // Navigator.pushNamed(context, AppRoutes)
+    Navigator.pushNamed(context, AppRoutes.autofillForm, arguments: text.text);
   }
 
   @override

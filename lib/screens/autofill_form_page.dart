@@ -13,6 +13,19 @@ class _AutofillFormPageState extends State<AutofillFormPage> {
   final surnameController = TextEditingController();
   final expirycontroller = TextEditingController();
 
+  String? str = '';
+
+  @override
+  void didChangeDepend() {
+    super.didChangeDependencies();
+
+    final text = ModalRoute.of(context)!.settings.arguments as String?;
+    str = text;
+    if (text != null && text.isNotEmpty) {
+      //เงื่อนไข ดึง text มาใช้งาน
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +34,7 @@ class _AutofillFormPageState extends State<AutofillFormPage> {
         padding: EdgeInsets.all(24),
         child: Column(
           children: [
+            Text(str!),
             TextField(
               controller: idController,
               decoration: const InputDecoration(labelText: 'เลขบัตรประชาชน'),
