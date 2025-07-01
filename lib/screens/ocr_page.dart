@@ -15,9 +15,9 @@ class _OcrPageState extends State<OcrPage> {
   File? imageFile;
   bool isLoading = false;
 
-  Future<void> pickAndRecognizeText() async {
+  Future<void> pickAndRecognizeText(ImageSource source) async {
     final picker = ImagePicker();
-    final picked = await picker.pickImage(source: ImageSource.gallery);
+    final picked = await picker.pickImage(source: source);
     if (picked == null) return;
     setState(() {
       imageFile = File(picked.path);
@@ -51,8 +51,13 @@ class _OcrPageState extends State<OcrPage> {
                   : const SizedBox.shrink(),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: pickAndRecognizeText,
+                onPressed: () => pickAndRecognizeText(ImageSource.gallery),
                 child: const Text("เลือกรูปภาพเพื่อสแกนข้อความ"),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () => pickAndRecognizeText(ImageSource.camera),
+                child: const Text("ถ่ายรูป"),
               ),
               const SizedBox(height: 20),
               if (isLoading)
